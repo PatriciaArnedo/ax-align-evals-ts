@@ -1,4 +1,4 @@
-# 🌦️ Mastra Weather Orchestrator with Phoenix Evaluation
+# 🌦️  Align LLM Judge Evals (Mastra & Phoenix Evals)
 
 A Mastra orchestrator agent with Phoenix evaluation pipeline for weather-based activity planning.
 
