@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "lib": ["deno.ns", "dom"]
+    },
+    "nodeModulesDir": "auto",
+    "imports": {
+      "@arizeai/phoenix-client": "npm:@arizeai/phoenix-client@latest",
+      "@arizeai/phoenix-evals": "npm:@arizeai/phoenix-evals@latest",
+      "@ai-sdk/openai": "npm:@ai-sdk/openai@latest"
+    }
+}
