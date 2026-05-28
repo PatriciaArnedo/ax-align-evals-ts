@@ -2,8 +2,6 @@
 import { Mastra } from '@mastra/core/mastra';
 import { PinoLogger } from '@mastra/loggers';
 import { LibSQLStore } from '@mastra/libsql';
-import { ConsoleSpanExporter } from '@opentelemetry/sdk-trace-base';
-
 // Import orchestrator/worker agents - this is the only workflow pattern now
 import { weatherOrchestratorAgent } from './agents/weather-orchestrator-agent';
 
@@ -33,12 +31,13 @@ export const mastra = new Mastra({
       type: "custom",
       tracerName: "mastra-orchestrator-workflow",
       exporter: new OpenInferenceOTLPTraceExporter({
-        url: process.env.PHOENIX_COLLECTOR_ENDPOINT + "/v1/traces",
+        url: "https://otlp.arize.com/v1/traces",
         headers: {
-          Authorization: `Bearer ${process.env.PHOENIX_API_KEY}`,
+          "arize-space-id": process.env.ARIZE_SPACE_ID,
+          "arize-api-key": process.env.ARIZE_API_KEY,
         },
         spanFilter: isOpenInferenceSpan,
-      }),    
+      }),
     },
   },
 });

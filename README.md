@@ -1,6 +1,6 @@
-# 🌦️  Align LLM Judge Evals (Mastra & Phoenix Evals)
+# 🌦️  Align LLM Judge Evals (Mastra & Arize AX)
 
-A Mastra orchestrator agent with Phoenix evaluation pipeline for weather-based activity planning.
+A Mastra orchestrator agent with Arize AX evaluation pipeline for weather-based activity planning.
 
 ## 🚀 Quick Start
 
@@ -12,10 +12,8 @@ deno install
 
 # Set environment variables
 export OPENAI_API_KEY="your-openai-api-key"
-export PHOENIX_COLLECTOR_ENDPOINT="http://localhost:6006"
-
-# Start Phoenix server (separate terminal)
-phoenix serve
+export ARIZE_API_KEY="your-arize-api-key"
+export ARIZE_SPACE_ID="your-arize-space-id"
 
 # Start Mastra agent GUI 
 npm start
@@ -65,5 +63,5 @@ jupyter notebook   # Start evaluation notebook
 ## 📚 Learn More
 
 - [Mastra Documentation](https://mastra.ai)
-- [Arize Phoenix](https://phoenix.arizeai.com)
+- [Arize AX Documentation](https://arize.com/docs/ax/)
 - [OpenInference Tracing](https://github.com/Arize-ai/openinference)
