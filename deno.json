@@ -6,5 +6,9 @@
     "imports": {
       "@arizeai/ax-client": "npm:@arizeai/ax-client@latest",
       "openai": "npm:openai@latest"
+    },
+    "allowScripts": {
+        "allow": [],
+        "deny": ["npm:esbuild@0.25.12", "npm:esbuild@0.28.0", "npm:fsevents@2.3.3", "npm:protobufjs@7.6.1"]
     }
 }

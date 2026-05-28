@@ -2,6 +2,21 @@
 
 A Mastra orchestrator agent with Arize AX evaluation pipeline for weather-based activity planning.
 
+## 📋 Prerequisites
+
+- [**Node.js**]((https://nodejs.org)) (v18+)
+- **Deno**
+
+  ```bash
+  curl -fsSL https://deno.land/install.sh | sh
+  ```
+
+- **Jupyter**
+
+  ```bash
+  pip install jupyter notebook
+  ```
+
 ## 🚀 Quick Start
 
 ### 1. Setup & Run Agent (Generate Traces First)
@@ -25,8 +40,6 @@ npm start
 ```bash
 # Start Jupyter with Deno kernel
 jupyter notebook
-
-# Open and run: aligning_evals_mastra.ipynb
 ```
 
 ## 🏗️ How It Works
