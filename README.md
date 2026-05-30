@@ -64,18 +64,19 @@ Run cells in order top to bottom.
 **Orchestrator + Tools Pattern**: A single orchestrator agent coordinates three specialized tools:
 
 ```
-📍 User Request → 🎯 Weather Orchestrator Agent
+📍 User request sent to the Weather Orchestrator Agent
     ↓
-🌤️ weatherTool (fetch weather data)
+🌤️ Agent uses weatherTool to fetch weather data
     ↓
-🔍 weatherAnalysisTool (analyze patterns)  
+🔍 Agent uses weatherAnalysisTool to analyze patterns  
     ↓
-📅 activityPlanningTool (recommend activities)
+📅 Agent uses activityPlanningTool to recommend activities
     ↓
 ✅ Final Response
 ```
 
 ### Architecture:
+
 - **🎯 Weather Orchestrator**: Single agent that enforces tool usage flow
 - **🌤️ Weather Tool**: Direct API calls to fetch weather data
 - **🔍 Analysis Tool**: AI-powered weather pattern analysis
