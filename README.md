@@ -1,98 +1,70 @@
-# 🌦️  Align LLM Judge Evals (Mastra & Arize AX)
+# Mastra Agent with Arize AX Tracing
 
-A Mastra orchestrator agent with Arize AX evaluation pipeline for weather-based activity planning.
+Companion repo for the [Arize AX tutorial](https://arize.com/docs/ax/). A Mastra orchestrator agent instrumented with OpenInference tracing that sends spans to Arize AX.
 
-## 📋 Prerequisites
+## Prerequisites
 
-- [**Node.js**]((https://nodejs.org)) (v18+)
-- **Deno**
+- [Node.js](https://nodejs.org) v20.9.0+
+- An [Arize AX](https://app.arize.com) account (Space ID and API key)
+- An [OpenAI](https://platform.openai.com) API key
 
-  ```bash
-  curl -fsSL https://deno.land/install.sh | sh
-  ```
-
-- **Jupyter**
-
-  ```bash
-  pip install jupyter notebook
-  ```
-
-## 🚀 Quick Start
-
-### 1. Setup & Run Agent (Generate Traces First)
+## Setup
 
 ```bash
-# Install dependencies
 npm install
-deno install
+```
 
-# Set environment variables
+Set environment variables:
+
+```bash
 export OPENAI_API_KEY="your-openai-api-key"
 export ARIZE_API_KEY="your-arize-api-key"
 export ARIZE_SPACE_ID="your-arize-space-id"
+```
 
-# Start Mastra agent GUI 
+## Run
+
+```bash
 npm start
 ```
 
-**Make requests to generate traces with tool calls** - this is essential for the evaluation pipeline.
+This starts the Mastra dev server and opens the agent UI. Send requests to the weather orchestrator agent to generate traces — they will appear in your Arize AX space within a few seconds.
 
-### 2. Run Evaluation Notebook
+## How it works
 
-Register the Deno kernel:
-
-  ```bash
-  deno jupyter --install
-  ```
-
-Then run the Jupyter notebook and select `aligning_evals_mastra.ipynb`.
-
-```bash
-# Start Jupyter with Deno kernel
-jupyter notebook
-```
-
-To run the notebook:
-
-- Press **Shift + Enter** to run a cell and advance to the next one
-- Or use **Run → Run All Cells** from the menu to run everything at once
-
-Run cells in order top to bottom.
-
-## 🏗️ How It Works
-
-**Orchestrator + Tools Pattern**: A single orchestrator agent coordinates three specialized tools:
+A single orchestrator agent coordinates three tools in sequence:
 
 ```
-📍 User request sent to the Weather Orchestrator Agent
+User request
     ↓
-🌤️ Agent uses weatherTool to fetch weather data
+Weather Orchestrator Agent
     ↓
-🔍 Agent uses weatherAnalysisTool to analyze patterns  
+weatherTool          → fetches current weather data
     ↓
-📅 Agent uses activityPlanningTool to recommend activities
+weatherAnalysisTool  → analyzes weather patterns
     ↓
-✅ Final Response
+activityPlanningTool → recommends activities
+    ↓
+Final response
 ```
 
-### Architecture:
+Tracing is configured in [src/mastra/index.ts](src/mastra/index.ts) using `@arizeai/openinference-mastra`. Every agent invocation and tool call is exported as an OpenInference span to `https://otlp.arize.com/v1/traces`.
 
-- **🎯 Weather Orchestrator**: Single agent that enforces tool usage flow
-- **🌤️ Weather Tool**: Direct API calls to fetch weather data
-- **🔍 Analysis Tool**: AI-powered weather pattern analysis
-- **📅 Planning Tool**: AI-powered activity recommendations
+## Project structure
 
-## 🛠️ Commands
-
-```bash
-npm start          # Start Mastra agent GUI
-npm run verify     # Check setup
-deno install       # Install Deno dependencies
-jupyter notebook   # Start evaluation notebook
+```text
+src/mastra/
+├── index.ts                          # Mastra setup + Arize AX exporter
+├── agents/
+│   └── weather-orchestrator-agent.ts
+└── tools/
+    ├── weather-tool.ts
+    ├── weather-analysis-tool.ts
+    └── activity-planning-tool.ts
 ```
 
-## 📚 Learn More
+## Resources
 
-- [Mastra Documentation](https://mastra.ai)
 - [Arize AX Documentation](https://arize.com/docs/ax/)
-- [OpenInference Tracing](https://github.com/Arize-ai/openinference)
+- [OpenInference for Mastra](https://github.com/Arize-ai/openinference/tree/main/js/packages/openinference-mastra)
+- [Mastra Documentation](https://mastra.ai/docs)
